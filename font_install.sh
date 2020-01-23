@@ -7,8 +7,12 @@ if [ $1 ];then
 	elif [  -d "$1" ] && [ "$(ls $1  | grep -P "(.ttf)")" ] ;then
 		echo "valid folder"
 	
+	
+	elif [  -f "$1" ] && [ "$(echo $1  | grep -P "(.zip)")" ] && [ "$(unzip -l $1  | grep -P "(.ttf)")" ] ;then
+		echo "valid zip"
+	
 	else
-		echo "the first command argument must an existing .ttf file, a folder containing .ttf files or a zip file"
+		echo "Error: the first command argument must an existing .ttf file, a folder containing .ttf files or a zip file"
 	
 	fi
 
