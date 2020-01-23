@@ -27,6 +27,9 @@ if [ $1 ];then
 	echo $?
 
 else
-	echo "ask user for font name"
+	read -p "font file, folder or zip: " font_files
+
+	isValidInput $font_files
+	echo $?
 
 fi 
