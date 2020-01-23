@@ -33,3 +33,15 @@ else
 	echo $?
 
 fi 
+
+##  TODO  ##
+#1. replace ~ to user home dir in font_files var
+#2. add logic to ask the user for the dir again if any error occours
+#3. Get the font name
+#4. Create a Fonts folder if not exist
+#5. Create font folder inside fonts
+#6. proccess font files names
+#7. move font files to the recently created font folder
+#8. copy font files to /usr/share/fonts/TTF
+#9. clear font cache and regenerate
+#10. add flags logic to the command
