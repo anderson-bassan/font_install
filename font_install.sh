@@ -105,6 +105,22 @@ function getFontType {
 
 }
 
+function copyFontFiles {
+	case $1 in
+		"file")
+			cp $2 $3;;
+			
+		"folder")
+			cp $(echo "$2*.ttf") $(tildeToHome $3);;
+			
+		"zip")
+			mv $3
+			unzip $2;;
+	
+	esac
+
+}
+
 if [ $1 ];then
 	isValidInput $1
 	
@@ -131,8 +147,8 @@ done
 
 font_name=$(getFontName)
 createFolder "~/Fonts"
-createFolder "~/Fonts/$(processFolderName  "$font_name")"
-getFontType $font_files
+createFolder "~/Fonts/$(processFolderName   "$font_name")"
+copyFontFiles $(getFontType $font_files) "$font_files" "~/Fonts/$(processFolderName  "$font_name")/"
 
 ##  TODO  ##
 #6. copy/extract font files to the recently created font folder
