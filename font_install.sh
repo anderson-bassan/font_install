@@ -50,7 +50,20 @@ else
 	
 fi 
 
-echo $?
+while [ $? -ne 0 ]
+do
+	read -p "try again?[y/n] " try_again
+	
+	if [ "$try_again" == "y" ];then
+		font_files=$(askUserForFontFiles)
+		isValidInput $font_files
+		
+	else
+		break
+	
+	fi
+		
+done
 
 ##  TODO  ##
 #2. add logic to ask the user for the dir again if any error occours
