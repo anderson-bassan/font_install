@@ -84,7 +84,7 @@ function createFolder {
 	folderExists $1
 	
 	if [ "$?" == "1" ];then
-		folder=$(tildeToHome $1)
+		folder=$(processFolderName $(tildeToHome $1))
 		mkdir $folder	
 	
 	fi
@@ -117,11 +117,11 @@ done
 
 font_name=$(getFontName)
 createFolder "~/Fonts"
+createFolder "~/Fonts/$(processFolderName  "$font_name")"
 
 ##  TODO  ##
-#5. Create font folder inside fonts
-#6. proccess font files names
-#7. move font files to the recently created font folder
+#6. copy/extract font files to the recently created font folder
+#7. proccess font files names
 #8. copy font files to /usr/share/fonts/TTF
 #9. clear font cache and regenerate
 #10. add flags logic to the command
