@@ -100,6 +100,7 @@ do
 done
 
 getFontName
+createFolder "~/Fonts"
 
 ##  TODO  ##
 #4. Create a Fonts folder if not exist
