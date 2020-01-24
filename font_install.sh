@@ -10,6 +10,14 @@ function tildeToHome {
 
 }
 
+function askUserForFontFiles {
+	read -p "font file, folder or zip: " font_files
+
+	font_files=$(tildeToHome $font_files)
+	echo $font_files
+
+}
+
 
 function isValidInput {
 	if [  -f "$1" ] && [ $(echo $1  | grep -P "(.ttf)") ] ;then
@@ -35,16 +43,14 @@ function isValidInput {
 
 if [ $1 ];then
 	isValidInput $1
-	echo $?
-
+	
 else
-	read -p "font file, folder or zip: " font_files
-
-	font_files=$(tildeToHome $font_files)
+	font_files=$(askUserForFontFiles)
 	isValidInput $font_files
-	echo $?
-
+	
 fi 
+
+echo $?
 
 ##  TODO  ##
 #2. add logic to ask the user for the dir again if any error occours
