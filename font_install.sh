@@ -42,15 +42,27 @@ function isValidInput {
 
 
 function getFontName {
-while [ "$confirm_font_name" != "y" ]
-do
-	read -p "what's the font name? " font_name
-	read -p "the font name is $font_name, is that right?[y/n] " confirm_font_name
+	while [ "$confirm_font_name" != "y" ]
+	do
+		read -p "what's the font name? " font_name
+		read -p "the font name is $font_name, is that right?[y/n] " confirm_font_name
 
-done
+	done
 
 }
 
+function folderExists {
+	folder=$(tildeToHome $1)
+	
+	if [ -d "$folder" ];then
+		return 0
+	
+	else
+		return 1
+	
+	fi
+
+}
 
 if [ $1 ];then
 	isValidInput $1
@@ -77,7 +89,6 @@ do
 done
 
 getFontName
-
 
 ##  TODO  ##
 #4. Create a Fonts folder if not exist
