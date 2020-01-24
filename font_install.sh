@@ -48,6 +48,8 @@ function getFontName {
 		read -p "the font name is $font_name, is that right?[y/n] " confirm_font_name
 
 	done
+	
+	echo "$font_name"
 
 }
 
@@ -61,6 +63,20 @@ function folderExists {
 		return 1
 	
 	fi
+
+}
+
+function processFolderName {
+	folderNameWords=($(echo "$1" | tr " " "\n" | tr "_" "\n" ));
+	processedFolderName=""
+	
+	for word in ${folderNameWords[@]};
+	do
+		processedFolderName+="$(tr '[:lower:]' '[:upper:]' <<< ${word:0:1})${word:1}"
+	
+	done
+	
+	echo $processedFolderName
 
 }
 
@@ -99,11 +115,10 @@ do
 		
 done
 
-getFontName
+font_name=$(getFontName)
 createFolder "~/Fonts"
 
 ##  TODO  ##
-#4. Create a Fonts folder if not exist
 #5. Create font folder inside fonts
 #6. proccess font files names
 #7. move font files to the recently created font folder
