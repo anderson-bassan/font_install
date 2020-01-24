@@ -91,6 +91,20 @@ function createFolder {
 
 }
 
+function getFontType {
+	if [  -f "$1" ] && [ $(echo $1  | grep -P "(.ttf)") ] ;then
+		echo "file"
+	
+	elif [  -d "$1" ] && [ "$(ls $1  | grep -P "(.ttf)")" ] ;then
+		echo "folder"
+
+	else	
+		echo "zip"
+		
+	fi
+
+}
+
 if [ $1 ];then
 	isValidInput $1
 	
@@ -118,6 +132,7 @@ done
 font_name=$(getFontName)
 createFolder "~/Fonts"
 createFolder "~/Fonts/$(processFolderName  "$font_name")"
+getFontType $font_files
 
 ##  TODO  ##
 #6. copy/extract font files to the recently created font folder
