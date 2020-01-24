@@ -1,4 +1,15 @@
 #! /bin/bash
+function tildeToHome {
+	if [ $(echo "$1" | grep -oP "(~)" ) ]; then
+		echo "$HOME$( echo $1 | grep -oP "(/[a-zA-Z0-9/]+)" )"
+		
+	else
+		echo $1
+		
+	fi
+
+}
+
 
 function isValidInput {
 	if [  -f "$1" ] && [ $(echo $1  | grep -P "(.ttf)") ] ;then
@@ -29,13 +40,13 @@ if [ $1 ];then
 else
 	read -p "font file, folder or zip: " font_files
 
+	font_files=$(tildeToHome $font_files)
 	isValidInput $font_files
 	echo $?
 
 fi 
 
 ##  TODO  ##
-#1. replace ~ to user home dir in font_files var
 #2. add logic to ask the user for the dir again if any error occours
 #3. Get the font name
 #4. Create a Fonts folder if not exist
