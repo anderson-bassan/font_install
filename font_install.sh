@@ -41,6 +41,17 @@ function isValidInput {
 }
 
 
+function getFontName {
+while [ "$confirm_font_name" != "y" ]
+do
+	read -p "what's the font name? " font_name
+	read -p "the font name is $font_name, is that right?[y/n] " confirm_font_name
+
+done
+
+}
+
+
 if [ $1 ];then
 	isValidInput $1
 	
@@ -65,9 +76,10 @@ do
 		
 done
 
+getFontName
+
+
 ##  TODO  ##
-#2. add logic to ask the user for the dir again if any error occours
-#3. Get the font name
 #4. Create a Fonts folder if not exist
 #5. Create font folder inside fonts
 #6. proccess font files names
