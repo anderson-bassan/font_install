@@ -64,6 +64,17 @@ function folderExists {
 
 }
 
+function createFolder {
+	folderExists $1
+	
+	if [ "$?" == "1" ];then
+		folder=$(tildeToHome $1)
+		mkdir $folder	
+	
+	fi
+
+}
+
 if [ $1 ];then
 	isValidInput $1
 	
