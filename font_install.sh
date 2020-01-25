@@ -1,7 +1,7 @@
 #! /bin/bash
 function tildeToHome {
 	if [ $(echo "$1" | grep -oP "(~)" ) ]; then
-		echo "$HOME$( echo $1 | grep -oP "(/[a-zA-Z0-9/]+)" )"
+		echo "$HOME$( echo $1 | grep -oP "(/[a-zA-Z0-9_/.]+)" )"
 		
 	else
 		echo $1
@@ -20,7 +20,7 @@ function askUserForFontFiles {
 
 
 function isValidInput {
-	if [  -f "$1" ] && [ $(echo $1  | grep -P "(.ttf)") ] ;then
+	if [  -f "$1" ] && [ "$(echo $1  | grep -P "(.ttf)")" ] ;then
 		echo "search by the file"
 		return 0
 	
@@ -92,7 +92,7 @@ function createFolder {
 }
 
 function getFontType {
-	if [  -f "$1" ] && [ $(echo $1  | grep -P "(.ttf)") ] ;then
+	if [  -f "$1" ] && [ "$(echo $1  | grep -P "(.ttf)")" ] ;then
 		echo "file"
 	
 	elif [  -d "$1" ] && [ "$(ls $1  | grep -P "(.ttf)")" ] ;then
@@ -108,7 +108,7 @@ function getFontType {
 function copyFontFiles {
 	case $1 in
 		"file")
-			cp $2 $3;;
+			cp $2 $(tildeToHome $3);;
 			
 		"folder")
 			cp $(echo "$2*.ttf") $(tildeToHome $3);;
