@@ -164,9 +164,17 @@ font_name=$(getFontName)
 createFolder "~/Fonts"
 createFolder "~/Fonts/$(processFolderName   "$font_name")"
 copyFontFiles $(getFontType $font_files) "$font_files" "~/Fonts/$(processFolderName  "$font_name")/"
-# echo "$(ls $( tildeToHome "~/Fonts/$(processFolderName  "$font_name")/*.ttf"))"
+copied_font_files="$(ls $( tildeToHome "~/Fonts/$(processFolderName  "$font_name")/") | grep -P "(.ttf)")"
+
+for font_file in $copied_font_files;do
+	new_font_dir=$( tildeToHome "~/Fonts/$(processFolderName  "$font_name")/")
+	old_font_name="$font_file"
+	new_font_name=$(processFontFilesNames "$font_file")
+	
+	mv $(echo "$new_font_dir$old_font_name") $(echo "$new_font_dir$new_font_name")
+
+done
+
 ##  TODO  ##
-#7. proccess font files names
-#8. copy font files to /usr/share/fonts/TTF
 #9. clear font cache and regenerate
 #10. add flags logic to the command
