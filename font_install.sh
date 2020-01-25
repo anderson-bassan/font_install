@@ -115,10 +115,25 @@ function copyFontFiles {
 			
 		"zip")
 			cd $(tildeToHome $3)
-			unzip $2;;
+			unzip -qq $2;;
 	
 	esac
 
+}
+
+function processFontFilesNames {
+	font_files_name=$(echo "$(echo ${1:0:1} | tr [:lower:] [:upper:])$(echo ${1:1})" |  tr " " "\n")
+	final_name=""
+		
+	for name in $font_files_name;do
+		name=$(echo "$(echo ${name:0:1} | tr [:lower:] [:upper:])$(echo ${name:1})" | grep -oP "([A-Z]+[a-z0-9_]+)" | tr [:upper:] [:lower:])
+		final_name+=$(echo "$(echo "$name")_")
+		
+	done
+	
+	final_name=$( echo $(echo "$(echo ${final_name:0:((${#final_name}-1))}).ttf") | tr " " "_" )
+	echo $final_name
+	
 }
 
 if [ $1 ];then
@@ -149,9 +164,8 @@ font_name=$(getFontName)
 createFolder "~/Fonts"
 createFolder "~/Fonts/$(processFolderName   "$font_name")"
 copyFontFiles $(getFontType $font_files) "$font_files" "~/Fonts/$(processFolderName  "$font_name")/"
-
+# echo "$(ls $( tildeToHome "~/Fonts/$(processFolderName  "$font_name")/*.ttf"))"
 ##  TODO  ##
-#6. copy/extract font files to the recently created font folder
 #7. proccess font files names
 #8. copy font files to /usr/share/fonts/TTF
 #9. clear font cache and regenerate
