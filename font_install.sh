@@ -114,7 +114,7 @@ function copyFontFiles {
 			cp $(echo "$2*.ttf") $(tildeToHome $3);;
 			
 		"zip")
-			mv $3
+			cd $(tildeToHome $3)
 			unzip $2;;
 	
 	esac
