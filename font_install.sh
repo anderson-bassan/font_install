@@ -175,6 +175,8 @@ for font_file in $copied_font_files;do
 
 done
 
+sudo cp `echo "$new_font_dir*.ttf"` /usr/share/fonts/TTF/
+
 ##  TODO  ##
 #9. clear font cache and regenerate
 #10. add flags logic to the command
