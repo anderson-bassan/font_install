@@ -176,6 +176,7 @@ for font_file in $copied_font_files;do
 done
 
 sudo cp `echo "$new_font_dir*.ttf"` /usr/share/fonts/TTF/
+sudo fc-cache
 
 ##  TODO  ##
 #9. clear font cache and regenerate
